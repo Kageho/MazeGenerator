@@ -9,7 +9,7 @@ public class Maze {
     private Set<Edge> minSpanningTree;
     private Set<Node> nodes;
     private ArrayList<Edge> edges;
-    Random random;
+    private Random random;
 
     public Maze(int rows, int columns) {
         this.COLUMNS = columns - 2;
@@ -20,19 +20,20 @@ public class Maze {
         }
     }
 
-    public void createMaze() {
+    public boolean[][] createAndGetMaze() {
         if (!(ROWS <= 2 || COLUMNS <= 2)) {
             random = new Random();
             createNodes();
             createEdges();
             useAlgorithmOfPrimAndGetMST();
             fillGird();
-            printGird();
+            return gird;
         } else if (ROWS >= 1 && COLUMNS >= 1) {
             makeSmallMaze();
-            printGird();
+            return gird;
         } else {
             System.out.println("Your data is wrong. Can't make a maze");
+            return new boolean[0][0];
         }
     }
 
@@ -79,7 +80,7 @@ public class Maze {
         // it helps to deal with even number of columns, The same situation is here, look below
         if (COLUMNS % 2 == 0) {
             gird[gate][COLUMNS] = true;
-            for (int i = 0; i < ROWS ; i++) {
+            for (int i = 0; i < ROWS; i++) {
                 do {
                     gate = random.nextInt(ROWS);
                 } while (gate % 2 != 0 || gate >= ROWS || gate == 0);
@@ -100,15 +101,6 @@ public class Maze {
                     gird[ROWS][gate] = true;
                 }
             }
-        }
-    }
-
-    private void printGird() {
-        for (var i : gird) {
-            for (var j : i) {
-                System.out.print(j ? "  " : "\u2588\u2588");
-            }
-            System.out.println();
         }
     }
 
