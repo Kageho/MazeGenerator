@@ -17,7 +17,7 @@ public class Menu {
     }
 
     public void run() {
-        Pattern pattern0_4 = Pattern.compile("[0-4]");
+        Pattern pattern0_4 = Pattern.compile("[0-5]");
         Pattern pattern0_2 = Pattern.compile("[0-2]");
         Matcher matcher0_4;
         Matcher matcher0_2;
@@ -48,6 +48,9 @@ public class Menu {
                         //display the maze
                         printMaze();
                         break;
+                    case "5":
+                        MazeSolver mazeSolver = new MazeSolver(currentMaze);
+                        mazeSolver.solveMaze();
                 }
             }
             matcher0_2 = pattern0_2.matcher(command);
@@ -144,7 +147,7 @@ public class Menu {
         System.out.println("=== Menu ===");
         System.out.println("1. Generate a new maze\n2. Load a maze");
         if (isThereAnyMaze) {
-            System.out.println("3. Save the maze\n4. Display the maze");
+            System.out.println("3. Save the maze\n4. Display the maze\n5. Find the escape");
         }
         System.out.println("0. Exit");
     }
